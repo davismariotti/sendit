@@ -14,8 +14,13 @@ class GameScene: SKScene {
     var touched = false
     var location = CGPoint.zero
     var ball: SKShapeNode = SKShapeNode(circleOfRadius: 15)
+    var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
 
     override func didMove(to view: SKView) {
+        background.size = frame.size
+        background.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        addChild(background)
+
         let path = CGMutablePath()
         path.addArc(center: CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2),
                     radius: 15,
@@ -28,6 +33,7 @@ class GameScene: SKScene {
         ball.strokeColor = .cyan
         ball.glowWidth = 0.5
         addChild(ball)
+        print(ball.position)
     }
 
 
@@ -39,13 +45,13 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         touched = true
         for touch in touches {
-            location = touch.location(in: self)
+            location = touch.location(in: view)
         }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            location = touch.location(in: self)
+            location = touch.location(in: view)
 
         }
     }
@@ -56,14 +62,10 @@ class GameScene: SKScene {
 
     func moveNode() {
         if touched {
-            let speed: CGFloat = 1
-            if location.x < self.view!.frame.size.width / 4 {
-                let newLocation = ball.position.x - speed
-                ball.position = CGPoint(x: newLocation, y: ball.position.y)
-            } else {
-                let newLocation = ball.position.x + speed
-                ball.position = CGPoint(x: newLocation, y: ball.position.y)
-            }
+            let ballPoint = CGPoint(x: (frame.width / 2) + ball.position.x, y: (frame.height / 2) + ball.position.y)
+            let speed: CGFloat = (location.x - ballPoint.x) / 30
+            let newLocation = ball.position.x + speed
+            ball.position = CGPoint(x: newLocation, y: ball.position.y)
         }
     }
 }

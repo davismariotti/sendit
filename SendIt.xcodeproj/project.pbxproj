@@ -35,6 +35,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39A2D68D205A08610001C4BD /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				39EA092720578F3900444B4F /* GameViewController.swift */,
+				39EA092B2057907F00444B4F /* GameScene.swift */,
+				39EA092820578F3900444B4F /* GameViewController.xib */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 		39EA090920578F1A00444B4F = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +64,10 @@
 		39EA091420578F1A00444B4F /* SendIt */ = {
 			isa = PBXGroup;
 			children = (
+				39A2D68D205A08610001C4BD /* ui */,
 				39EA091520578F1A00444B4F /* AppDelegate.swift */,
 				39EA091C20578F1B00444B4F /* Assets.xcassets */,
 				39EA092120578F1B00444B4F /* Info.plist */,
-				39EA092720578F3900444B4F /* GameViewController.swift */,
-				39EA092B2057907F00444B4F /* GameScene.swift */,
-				39EA092820578F3900444B4F /* GameViewController.xib */,
 			);
 			path = SendIt;
 			sourceTree = "<group>";
