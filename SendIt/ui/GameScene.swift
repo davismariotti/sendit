@@ -22,12 +22,13 @@ class GameScene: SKScene {
         addChild(background)
 
         let path = CGMutablePath()
-        path.addArc(center: CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2),
+        path.addArc(center: CGPoint.zero,
                     radius: 15,
                     startAngle: 0,
                     endAngle: CGFloat.pi * 2,
                     clockwise: false)
         ball = SKShapeNode(path: path)
+        ball.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         ball.lineWidth = 1
         ball.fillColor = .cyan
         ball.strokeColor = .cyan
@@ -62,8 +63,7 @@ class GameScene: SKScene {
 
     func moveNode() {
         if touched {
-            let ballPoint = CGPoint(x: (frame.width / 2) + ball.position.x, y: (frame.height / 2) + ball.position.y)
-            let speed: CGFloat = (location.x - ballPoint.x) / 30
+            let speed: CGFloat = (location.x - ball.position.x) / 20
             let newLocation = ball.position.x + speed
             ball.position = CGPoint(x: newLocation, y: ball.position.y)
         }
