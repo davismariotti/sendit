@@ -13,9 +13,9 @@ class GameScene: SKScene {
 
     var touched = false
     var location = CGPoint.zero
-    var ball: SKShapeNode = SKShapeNode(circleOfRadius: 15)
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var background2: SKSpriteNode = SKSpriteNode(imageNamed: "background")
+    var climber: SKSpriteNode = SKSpriteNode(imageNamed: "climbergirl1")
 
     override func didMove(to view: SKView) {
         background.size = frame.size
@@ -25,27 +25,15 @@ class GameScene: SKScene {
         background2.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height * 1.5)
         addChild(background2)
 
-        let path = CGMutablePath()
-        path.addArc(center: CGPoint.zero,
-                    radius: 15,
-                    startAngle: 0,
-                    endAngle: CGFloat.pi * 2,
-                    clockwise: false)
-        ball = SKShapeNode(path: path)
-        ball.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
-        ball.lineWidth = 1
-        ball.fillColor = .cyan
-        ball.strokeColor = .cyan
-        ball.glowWidth = 0.5
-        addChild(ball)
-        print(ball.position)
+
+        climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        addChild(climber)
     }
 
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         moveNode()
-        moveBackground()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,19 +56,30 @@ class GameScene: SKScene {
 
     func moveNode() {
         if touched {
-            let speed: CGFloat = (location.x - ball.position.x) / 20
-            let newLocation = ball.position.x + speed
-            ball.position = CGPoint(x: newLocation, y: ball.position.y)
+            // First move horizontally
+            let speed: CGFloat = (location.x - climber.position.x) / 20
+            let newLocation = climber.position.x + speed
+            climber.position = CGPoint(x: newLocation, y: climber.position.y)
+            // then vertically
+            if (view!.frame.size.height - location.y) > view!.frame.size.height / 2 {
+                if climber.position.y < view!.frame.size.height - 50 {
+                    climber.position = CGPoint(x: climber.position.x, y: climber.position.y + 4)
+                } else {
+                    moveBackground()
+                }
+            } else if (view!.frame.size.height - location.y) < view!.frame.size.height / 2 && climber.position.y > 50 {
+                climber.position = CGPoint(x: climber.position.x, y: climber.position.y - 4)
+            }
         }
     }
 
     func moveBackground() {
-        background.position = CGPoint(x: background.position.x, y: background.position.y - 1)
-        if background.frame.maxY == 0 {
+        background.position = CGPoint(x: background.position.x, y: background.position.y - 4)
+        if background.frame.maxY <= 0 {
             background.position = CGPoint(x: background.position.x, y: view!.frame.size.height * 1.5)
         }
-        background2.position = CGPoint(x: background2.position.x, y: background2.position.y - 1)
-        if background2.frame.maxY == 0 {
+        background2.position = CGPoint(x: background2.position.x, y: background2.position.y - 4)
+        if background2.frame.maxY <= 0 {
             background2.position = CGPoint(x: background2.position.x, y: view!.frame.size.height * 1.5)
         }
     }
