@@ -9,13 +9,18 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var touched = false
     var location = CGPoint.zero
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var background2: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var climber: SKSpriteNode = SKSpriteNode(imageNamed: "climbergirl1")
+    var climberState = true
+    var score: Int = 0
+    var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
+    var pointNodes: [SKShapeNode] = []
+
 
     override func didMove(to view: SKView) {
         background.size = frame.size
@@ -27,13 +32,56 @@ class GameScene: SKScene {
 
 
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
+        climber.physicsBody?.isDynamic = false
+        climber.physicsBody!.contactTestBitMask = climber.physicsBody!.collisionBitMask
+        climber.name = "climber"
         addChild(climber)
+
+        scoreLabel.position = CGPoint(x: view.frame.size.width - 20, y: 20)
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.fontName = "8BITWONDERNominal"
+        scoreLabel.horizontalAlignmentMode = .right
+        addChild(scoreLabel)
+
+        for _ in 0...5 {
+            createPointNode()
+        }
+
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
+            if self.touched {
+                if self.climberState {
+                    self.climber.texture = SKTexture(imageNamed: "climbergirl1")
+                    self.climberState = false
+                } else {
+                    self.climber.texture = SKTexture(imageNamed: "climbergirl2")
+                    self.climberState = true
+                }
+            }
+
+        }
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+
+        physicsWorld.contactDelegate = self
+    }
+
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+
+        if contact.bodyA.node?.name == "climber" {
+            pointHit(climber: nodeA as! SKSpriteNode, object: nodeB)
+        } else if contact.bodyB.node?.name == "climber"{
+            pointHit(climber: nodeB as! SKSpriteNode, object: nodeA)
+        }
     }
 
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         moveNode()
+        scoreLabel.text = String(score / 25)
+
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -54,6 +102,28 @@ class GameScene: SKScene {
         touched = false
     }
 
+    func createPointNode() {
+        let newNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
+        newNode.physicsBody = SKPhysicsBody(rectangleOf: newNode.frame.size)
+        newNode.physicsBody?.isDynamic = false
+        newNode.physicsBody!.contactTestBitMask = newNode.physicsBody!.collisionBitMask
+        newNode.name = "point"
+        addChild(newNode)
+        newNode.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
+        newNode.fillColor = .yellow
+        pointNodes.append(newNode)
+    }
+
+    func movePointNodes() {
+        for node in pointNodes {
+            if node.position.y > -20 {
+                node.position = CGPoint(x: node.position.x, y: node.position.y - 4)
+            } else {
+                node.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
+            }
+        }
+    }
+
     func moveNode() {
         if touched {
             // First move horizontally
@@ -62,18 +132,26 @@ class GameScene: SKScene {
             climber.position = CGPoint(x: newLocation, y: climber.position.y)
             // then vertically
             if (view!.frame.size.height - location.y) > view!.frame.size.height / 2 {
-                if climber.position.y < view!.frame.size.height - 50 {
+                if climber.position.y < view!.frame.size.height - 250 {
                     climber.position = CGPoint(x: climber.position.x, y: climber.position.y + 4)
                 } else {
                     moveBackground()
                 }
-            } else if (view!.frame.size.height - location.y) < view!.frame.size.height / 2 && climber.position.y > 50 {
+            } else if (view!.frame.size.height - location.y) < view!.frame.size.height / 2 && climber.position.y > 150 {
                 climber.position = CGPoint(x: climber.position.x, y: climber.position.y - 4)
             }
         }
     }
 
+    func pointHit(climber: SKSpriteNode, object: SKNode) {
+        score += 500
+        object.removeFromParent()
+        pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
+    }
+
     func moveBackground() {
+        movePointNodes()
+        score += 1
         background.position = CGPoint(x: background.position.x, y: background.position.y - 4)
         if background.frame.maxY <= 0 {
             background.position = CGPoint(x: background.position.x, y: view!.frame.size.height * 1.5)
@@ -82,5 +160,9 @@ class GameScene: SKScene {
         if background2.frame.maxY <= 0 {
             background2.position = CGPoint(x: background2.position.x, y: view!.frame.size.height * 1.5)
         }
+    }
+
+    func rand(withMultiplier multiplier: Double) -> Double {
+        return drand48() * multiplier
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39971D912075CCE1001776D6 /* 8bitwonder.ttf */; };
 		39EA091620578F1A00444B4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA091520578F1A00444B4F /* AppDelegate.swift */; };
 		39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39EA091C20578F1B00444B4F /* Assets.xcassets */; };
 		39EA092920578F3900444B4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA092720578F3900444B4F /* GameViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39971D912075CCE1001776D6 /* 8bitwonder.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitwonder.ttf; sourceTree = "<group>"; };
 		39EA091220578F1A00444B4F /* SendIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EA091520578F1A00444B4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39EA091C20578F1B00444B4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39971D902075CCCD001776D6 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				39971D912075CCE1001776D6 /* 8bitwonder.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		39A2D68D205A08610001C4BD /* ui */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 				39EA091520578F1A00444B4F /* AppDelegate.swift */,
 				39EA091C20578F1B00444B4F /* Assets.xcassets */,
 				39EA092120578F1B00444B4F /* Info.plist */,
+				39971D902075CCCD001776D6 /* fonts */,
 			);
 			path = SendIt;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */,
 				39EA092A20578F3900444B4F /* GameViewController.xib in Resources */,
 				39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */,
 			);

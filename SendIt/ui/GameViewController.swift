@@ -16,6 +16,7 @@ class GameViewController: UIViewController {
         let scene = GameScene (size: view.bounds.size)
         let skView = view as! SKView
         skView.presentScene(scene)
+
     }
 
     override func didReceiveMemoryWarning() {
