@@ -21,6 +21,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
     var pointNodes: [SKShapeNode] = []
 
+    let pointCategory: UInt32 = 0x1 << 0
+    let climberCategory: UInt32 = 0x1 << 1
+
 
     override func didMove(to view: SKView) {
         background.size = frame.size
@@ -33,8 +36,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
-        climber.physicsBody?.isDynamic = false
-        climber.physicsBody!.contactTestBitMask = climber.physicsBody!.collisionBitMask
+        climber.physicsBody?.usesPreciseCollisionDetection = true
+        climber.physicsBody?.categoryBitMask = self.climberCategory
+        climber.physicsBody?.contactTestBitMask = pointCategory
+        climber.physicsBody?.affectedByGravity = false
         climber.name = "climber"
         addChild(climber)
 
@@ -61,9 +66,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         }
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        physicsBody?.affectedByGravity = false
 
         physicsWorld.contactDelegate = self
     }
+
+    // MARK: - Collisions
 
     func didBegin(_ contact: SKPhysicsContact) {
         guard let nodeA = contact.bodyA.node else { return }
@@ -103,15 +111,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func createPointNode() {
-        let newNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
-        newNode.physicsBody = SKPhysicsBody(rectangleOf: newNode.frame.size)
-        newNode.physicsBody?.isDynamic = false
-        newNode.physicsBody!.contactTestBitMask = newNode.physicsBody!.collisionBitMask
-        newNode.name = "point"
-        addChild(newNode)
-        newNode.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
-        newNode.fillColor = .yellow
-        pointNodes.append(newNode)
+        let pointNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
+
+        // Physics
+        pointNode.physicsBody = SKPhysicsBody(rectangleOf: pointNode.frame.size)
+        pointNode.physicsBody?.usesPreciseCollisionDetection = true
+        pointNode.physicsBody?.isDynamic = false
+        pointNode.physicsBody?.affectedByGravity = false
+        pointNode.name = "point"
+
+        pointNode.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
+
+        addChild(pointNode)
+        pointNode.fillColor = .yellow
+        pointNodes.append(pointNode)
     }
 
     func movePointNodes() {
@@ -144,9 +157,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func pointHit(climber: SKSpriteNode, object: SKNode) {
-        score += 500
-        object.removeFromParent()
-        pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
+        if object is SKShapeNode {
+            score += 500
+            object.removeFromParent()
+            pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
+            createPointNode()
+        }
     }
 
     func moveBackground() {
