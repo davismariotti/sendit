@@ -99,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        moveNode()
+        moveClimber()
         scoreLabel.text = String(score / 25)
 
     }
@@ -149,22 +149,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func moveNode() {
+    func moveClimber() {
         if touched {
             // First move horizontally
-            let speed: CGFloat = (location.x - climber.position.x) / 20
-            let newLocation = climber.position.x + speed
-            climber.position = CGPoint(x: newLocation, y: climber.position.y)
-            // then vertically
-            if (view!.frame.size.height - location.y) > view!.frame.size.height / 2 {
-                if climber.position.y < view!.frame.size.height - 250 {
-                    climber.position = CGPoint(x: climber.position.x, y: climber.position.y + 4)
-                } else {
-                    moveBackground()
-                }
-            } else if (view!.frame.size.height - location.y) < view!.frame.size.height / 2 && climber.position.y > 150 {
-                climber.position = CGPoint(x: climber.position.x, y: climber.position.y - 4)
+            let horizontalSpeed: CGFloat = (location.x - climber.position.x) / 20
+            let verticalSpeed: CGFloat = ((self.frame.size.height - location.y) - climber.position.y) / 20
+            let newLocationX = climber.position.x + horizontalSpeed
+            var newLocationY = climber.position.y
+
+            newLocationY = climber.position.y + verticalSpeed
+            if newLocationY < 150 {
+                newLocationY = 150
             }
+            if newLocationY > self.frame.size.height - 250 {
+                newLocationY = self.frame.size.height - 250
+                moveBackground()
+            }
+
+            climber.position = CGPoint(x: newLocationX, y: newLocationY)
         }
     }
 
