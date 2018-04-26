@@ -19,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var climberState = true
     var score: Int = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
+    let endGameLabel: SKLabelNode = SKLabelNode(text: "Game Over")
+    var gameOver = false
     var pointNodes: [SKShapeNode] = []
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
 
@@ -58,6 +60,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.horizontalAlignmentMode = .right
         addChild(scoreLabel)
 
+        endGameLabel.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+        endGameLabel.fontColor = SKColor.white
+        endGameLabel.fontName = "8BITWONDERNominal"
+        endGameLabel.horizontalAlignmentMode = .center
+
         for _ in 0...5 {
             createPointNode()
         }
@@ -69,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spider.physicsBody?.collisionBitMask = 0
         spider.physicsBody?.contactTestBitMask = self.climberCategory
         spider.physicsBody?.affectedByGravity = false
+        spider.name = "spider"
         addChild(spider)
 
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
@@ -95,11 +103,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
 
-        if contact.bodyA.node?.name == "climber" {
+        if contact.bodyA.node?.name == "climber" && contact.bodyB.node?.name == "point" {
             pointHit(climber: nodeA as! SKSpriteNode, object: nodeB)
-        } else if contact.bodyB.node?.name == "climber"{
+        } else if contact.bodyB.node?.name == "climber" && contact.bodyA.node?.name == "point" {
             pointHit(climber: nodeB as! SKSpriteNode, object: nodeA)
+        } else if contact.bodyA.node?.name == "climber" && contact.bodyB.node?.name == "spider" {
+            spiderHit(climber: nodeA as! SKSpriteNode, spider: nodeB as! SKSpriteNode)
+        } else if contact.bodyB.node?.name == "climber" && contact.bodyA.node?.name == "spider" {
+            spiderHit(climber: nodeB as! SKSpriteNode, spider: nodeA as! SKSpriteNode)
         }
+
     }
 
 
@@ -156,7 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func moveClimber() {
-        if touched {
+        if touched && !gameOver {
             // First move horizontally
             let horizontalSpeed: CGFloat = (location.x - climber.position.x) / 20
             let verticalSpeed: CGFloat = ((self.frame.size.height - location.y) - climber.position.y) / 20
@@ -182,6 +195,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             object.removeFromParent()
             pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
             createPointNode()
+        }
+    }
+
+    func spiderHit(climber: SKSpriteNode, spider: SKSpriteNode) {
+        if !self.children.contains(endGameLabel) {
+            addChild(endGameLabel)
+            gameOver = true
         }
     }
 
