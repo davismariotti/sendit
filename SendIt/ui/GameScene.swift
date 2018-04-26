@@ -26,6 +26,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let climberCategory: UInt32 = 0x1 << 1
     let spiderCategory: UInt32 = 0x1 << 2
 
+    let backgroundSpeed: CGFloat = 4.0
+
+
+    enum Direction {
+        case up, down
+    }
 
     override func didMove(to view: SKView) {
         background.size = frame.size
@@ -142,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func movePointNodes() {
         for node in pointNodes {
             if node.position.y > -20 {
-                node.position = CGPoint(x: node.position.x, y: node.position.y - 4)
+                node.position = CGPoint(x: node.position.x, y: node.position.y - self.backgroundSpeed)
             } else {
                 node.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
             }
@@ -163,7 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             if newLocationY > self.frame.size.height - 250 {
                 newLocationY = self.frame.size.height - 250
-                moveBackground()
+                moveBackground(direction: .down, speed: self.backgroundSpeed)
             }
 
             climber.position = CGPoint(x: newLocationX, y: newLocationY)
@@ -179,14 +185,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func moveBackground() {
+    func moveBackground(direction: Direction, speed: CGFloat) {
         movePointNodes()
         score += 1
-        background.position = CGPoint(x: self.frame.size.width / 2, y: background.position.y - 4)
+        background.position = CGPoint(x: self.frame.size.width / 2, y: background.position.y - speed)
         if background.frame.maxY <= 0 {
             background.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
-        background2.position = CGPoint(x: self.frame.size.width / 2, y: background2.position.y - 4)
+        background2.position = CGPoint(x: self.frame.size.width / 2, y: background2.position.y - speed)
         if background2.frame.maxY <= 0 {
             background2.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
