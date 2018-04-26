@@ -29,10 +29,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         background.size = frame.size
-        background.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        background.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
         addChild(background)
         background2.size = frame.size
-        background2.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height * 1.5)
+        background2.position = CGPoint(x: self.frame.size.width * 1.5, y: self.frame.size.height * 1.5)
         addChild(background2)
 
 
@@ -180,13 +180,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func moveBackground() {
         movePointNodes()
         score += 1
-        background.position = CGPoint(x: background.position.x, y: background.position.y - 4)
+        background.position = CGPoint(x: self.frame.size.width / 2, y: background.position.y - 4)
         if background.frame.maxY <= 0 {
-            background.position = CGPoint(x: background.position.x, y: view!.frame.size.height * 1.5)
+            background.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
-        background2.position = CGPoint(x: background2.position.x, y: background2.position.y - 4)
+        background2.position = CGPoint(x: self.frame.size.width / 2, y: background2.position.y - 4)
         if background2.frame.maxY <= 0 {
-            background2.position = CGPoint(x: background2.position.x, y: view!.frame.size.height * 1.5)
+            background2.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
     }
 
