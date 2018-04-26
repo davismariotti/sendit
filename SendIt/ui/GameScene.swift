@@ -20,9 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score: Int = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
     var pointNodes: [SKShapeNode] = []
+    var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
 
     let pointCategory: UInt32 = 0x1 << 0
     let climberCategory: UInt32 = 0x1 << 1
+    let spiderCategory: UInt32 = 0x1 << 2
 
 
     override func didMove(to view: SKView) {
@@ -38,7 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
         climber.physicsBody?.usesPreciseCollisionDetection = true
         climber.physicsBody?.categoryBitMask = self.climberCategory
-        climber.physicsBody?.contactTestBitMask = pointCategory
+        climber.physicsBody?.contactTestBitMask = self.pointCategory
+        climber.physicsBody?.collisionBitMask = 0
         climber.physicsBody?.affectedByGravity = false
         climber.name = "climber"
         addChild(climber)
@@ -52,6 +55,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for _ in 0...5 {
             createPointNode()
         }
+
+        spider.position = CGPoint(x: view.frame.size.width * 0.85, y: view.frame.size.height * 0.75)
+        spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
+        spider.physicsBody?.usesPreciseCollisionDetection = true
+        spider.physicsBody?.categoryBitMask = self.spiderCategory
+        spider.physicsBody?.collisionBitMask = 0
+        spider.physicsBody?.contactTestBitMask = self.climberCategory
+        spider.physicsBody?.affectedByGravity = false
+        addChild(spider)
 
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
             if self.touched {
