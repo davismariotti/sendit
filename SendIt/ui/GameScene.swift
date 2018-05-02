@@ -202,6 +202,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !self.children.contains(endGameLabel) {
             addChild(endGameLabel)
             gameOver = true
+            climber.physicsBody?.affectedByGravity = true
+            climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
         }
     }
 
