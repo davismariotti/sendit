@@ -23,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameOver = false
     var pointNodes: [SKShapeNode] = []
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
+    var spiderTimer: Timer!
 
     let pointCategory: UInt32 = 0x1 << 0
     let climberCategory: UInt32 = 0x1 << 1
@@ -46,6 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
+//        SKPhysicsBody(polygonFrom: CGPath()
         climber.physicsBody?.usesPreciseCollisionDetection = true
         climber.physicsBody?.categoryBitMask = self.climberCategory
         climber.physicsBody?.contactTestBitMask = self.pointCategory
@@ -78,6 +80,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spider.physicsBody?.affectedByGravity = false
         spider.name = "spider"
         addChild(spider)
+
+        spiderTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
+            let moveDownAction = SKAction.moveBy(x: 0, y: -300, duration: 1)
+            let moveUpAction = SKAction.moveBy(x: 0, y: 300, duration: 1)
+            let sequence1 = SKAction.group([moveDownAction, moveUpAction])
+            self.spider.run(sequence1)
+        }
+
 
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
             if self.touched {
@@ -115,6 +125,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
+    func moveSpider (){
+
+    }
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered

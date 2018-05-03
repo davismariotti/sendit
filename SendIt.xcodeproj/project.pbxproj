@@ -13,9 +13,11 @@
 		39EA092920578F3900444B4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA092720578F3900444B4F /* GameViewController.swift */; };
 		39EA092A20578F3900444B4F /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EA092820578F3900444B4F /* GameViewController.xib */; };
 		39EA092C2057907F00444B4F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA092B2057907F00444B4F /* GameScene.swift */; };
+		EE6F778384B18EEE97E98041 /* Pods_SendIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D181C242B6DCBE53B034018B /* Pods_SendIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.release.xcconfig"; sourceTree = "<group>"; };
 		39971D912075CCE1001776D6 /* 8bitwonder.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitwonder.ttf; sourceTree = "<group>"; };
 		39EA091220578F1A00444B4F /* SendIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EA091520578F1A00444B4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		39EA092720578F3900444B4F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		39EA092820578F3900444B4F /* GameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
 		39EA092B2057907F00444B4F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		7B4629A5721D1BBC1243DD0F /* Pods-SendIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.debug.xcconfig"; sourceTree = "<group>"; };
+		D181C242B6DCBE53B034018B /* Pods_SendIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +35,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6F778384B18EEE97E98041 /* Pods_SendIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CFFC7339AD842EEE95F9B59 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B4629A5721D1BBC1243DD0F /* Pods-SendIt.debug.xcconfig */,
+				28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		39971D902075CCCD001776D6 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +74,8 @@
 			children = (
 				39EA091420578F1A00444B4F /* SendIt */,
 				39EA091320578F1A00444B4F /* Products */,
+				0CFFC7339AD842EEE95F9B59 /* Pods */,
+				D219CD2E0FC6851A3CA2A8FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +99,14 @@
 			path = SendIt;
 			sourceTree = "<group>";
 		};
+		D219CD2E0FC6851A3CA2A8FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D181C242B6DCBE53B034018B /* Pods_SendIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,9 +114,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39EA092420578F1B00444B4F /* Build configuration list for PBXNativeTarget "SendIt" */;
 			buildPhases = (
+				5CACF0320ED97E8B1D8D7512 /* [CP] Check Pods Manifest.lock */,
 				39EA090E20578F1A00444B4F /* Sources */,
 				39EA090F20578F1A00444B4F /* Frameworks */,
 				39EA091020578F1A00444B4F /* Resources */,
+				4A06E1F0F852E1B5AE067115 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,6 +174,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A06E1F0F852E1B5AE067115 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SendIt/Pods-SendIt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SendIt/Pods-SendIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CACF0320ED97E8B1D8D7512 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SendIt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39EA090E20578F1A00444B4F /* Sources */ = {
@@ -279,16 +344,14 @@
 		};
 		39EA092520578F1B00444B4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B4629A5721D1BBC1243DD0F /* Pods-SendIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TND9GMD8DZ;
 				INFOPLIST_FILE = SendIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davismariotti.SendIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -298,16 +361,14 @@
 		};
 		39EA092620578F1B00444B4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TND9GMD8DZ;
 				INFOPLIST_FILE = SendIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davismariotti.SendIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
