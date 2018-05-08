@@ -14,30 +14,31 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        NetworkManager.getTopScores() {
+            (result: [ScoreData]?) in
+            if result != nil {
+                print(result!)
+            }
+        }
+    }
+
+    @IBAction func startGame(_ sender: UIButton) {
         let scene = GameScene (size: view.bounds.size)
         let skView = view as! SKView
         skView.presentScene(scene)
-
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func showTopScores(_ sender: UIButton) {
+        let vc = TopScoresTableViewController()
+        self.present(vc, animated: true, completion: nil)
     }
+
 
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 
 }
