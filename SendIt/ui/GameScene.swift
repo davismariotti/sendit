@@ -71,7 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             createPointNode()
         }
 
-        spider.position = CGPoint(x: view.frame.size.width * 0.85, y: view.frame.size.height * 0.75)
+        spider.position = CGPoint(x: view.frame.size.width * 0.85, y: view.frame.size.height + 100)
+        print(spider.size)
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.usesPreciseCollisionDetection = true
         spider.physicsBody?.categoryBitMask = self.spiderCategory
@@ -87,8 +88,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spiderTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
             let moveDownAction = SKAction.moveBy(x: 0, y: -300, duration: 1)
             let moveUpAction = SKAction.moveBy(x: 0, y: 300, duration: 1)
-            let sequence1 = SKAction.group([moveDownAction, moveUpAction])
-            self.spider.run(sequence1)
+            let sequence1 = SKAction.group([moveDownAction, SKAction.wait(forDuration: 2)])
+            self.spider.run(sequence1) {
+                self.spider.run(moveUpAction)
+            }
         }
 
 
