@@ -12,11 +12,14 @@ class TopScoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var score: UILabel!
     @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var date: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        score.font = UIFont(name: "8BITWONDERNominal", size: 20)
+        username.font = UIFont(name: "8BITWONDERNominal", size: 20)
+        score.textColor = UIColor.white
+        username.textColor = UIColor.white
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

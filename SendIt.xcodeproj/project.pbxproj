@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39230DCC20A2C6AC005CDFC2 /* TopScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */; };
+		39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */; };
 		39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39971D912075CCE1001776D6 /* 8bitwonder.ttf */; };
 		39E2BA1120A252F600824F6B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1020A252F600824F6B /* NetworkManager.swift */; };
 		39E2BA1420A253C200824F6B /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1320A253C200824F6B /* ScoreData.swift */; };
-		39E2BA1B20A25A0C00824F6B /* TopScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1920A25A0C00824F6B /* TopScoresTableViewController.swift */; };
-		39E2BA1C20A25A0C00824F6B /* TopScoresTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E2BA1A20A25A0C00824F6B /* TopScoresTableViewController.xib */; };
 		39E2BA1F20A25B8D00824F6B /* TopScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */; };
 		39E2BA2020A25B8D00824F6B /* TopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E2BA1E20A25B8D00824F6B /* TopScoreTableViewCell.xib */; };
 		39EA091620578F1A00444B4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA091520578F1A00444B4F /* AppDelegate.swift */; };
@@ -24,11 +24,11 @@
 
 /* Begin PBXFileReference section */
 		28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.release.xcconfig"; sourceTree = "<group>"; };
+		39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoreViewController.swift; sourceTree = "<group>"; };
+		39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopScoreViewController.xib; sourceTree = "<group>"; };
 		39971D912075CCE1001776D6 /* 8bitwonder.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitwonder.ttf; sourceTree = "<group>"; };
 		39E2BA1020A252F600824F6B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		39E2BA1320A253C200824F6B /* ScoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreData.swift; sourceTree = "<group>"; };
-		39E2BA1920A25A0C00824F6B /* TopScoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoresTableViewController.swift; sourceTree = "<group>"; };
-		39E2BA1A20A25A0C00824F6B /* TopScoresTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopScoresTableViewController.xib; sourceTree = "<group>"; };
 		39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoreTableViewCell.swift; sourceTree = "<group>"; };
 		39E2BA1E20A25B8D00824F6B /* TopScoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopScoreTableViewCell.xib; sourceTree = "<group>"; };
 		39EA091220578F1A00444B4F /* SendIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,12 +75,12 @@
 			isa = PBXGroup;
 			children = (
 				39EA092720578F3900444B4F /* GameViewController.swift */,
-				39EA092B2057907F00444B4F /* GameScene.swift */,
 				39EA092820578F3900444B4F /* GameViewController.xib */,
-				39E2BA1920A25A0C00824F6B /* TopScoresTableViewController.swift */,
-				39E2BA1A20A25A0C00824F6B /* TopScoresTableViewController.xib */,
+				39EA092B2057907F00444B4F /* GameScene.swift */,
 				39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */,
 				39E2BA1E20A25B8D00824F6B /* TopScoreTableViewCell.xib */,
+				39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */,
+				39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -193,11 +193,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39E2BA1C20A25A0C00824F6B /* TopScoresTableViewController.xib in Resources */,
 				39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */,
 				39EA092A20578F3900444B4F /* GameViewController.xib in Resources */,
 				39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */,
 				39E2BA2020A25B8D00824F6B /* TopScoreTableViewCell.xib in Resources */,
+				39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +251,7 @@
 				39EA092C2057907F00444B4F /* GameScene.swift in Sources */,
 				39E2BA1420A253C200824F6B /* ScoreData.swift in Sources */,
 				39EA092920578F3900444B4F /* GameViewController.swift in Sources */,
-				39E2BA1B20A25A0C00824F6B /* TopScoresTableViewController.swift in Sources */,
+				39230DCC20A2C6AC005CDFC2 /* TopScoreViewController.swift in Sources */,
 				39E2BA1F20A25B8D00824F6B /* TopScoreTableViewCell.swift in Sources */,
 				39EA091620578F1A00444B4F /* AppDelegate.swift in Sources */,
 			);

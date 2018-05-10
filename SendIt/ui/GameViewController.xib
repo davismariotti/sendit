@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="SendIt" customModuleProvider="target">
             <connections>
+                <outlet property="startButton" destination="Kpp-ZD-SpD" id="XAI-zV-cMm"/>
+                <outlet property="topScoreButton" destination="Unk-xB-oxT" id="78T-CE-JOT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

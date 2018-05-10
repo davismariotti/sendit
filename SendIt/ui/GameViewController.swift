@@ -11,28 +11,24 @@ import SpriteKit
 import PureLayout
 
 class GameViewController: UIViewController {
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var topScoreButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        NetworkManager.getTopScores() {
-            (result: [ScoreData]?) in
-            if result != nil {
-                print(result!)
-            }
-        }
     }
 
     @IBAction func startGame(_ sender: UIButton) {
         let scene = GameScene (size: view.bounds.size)
         let skView = view as! SKView
         skView.presentScene(scene)
+        startButton.isHidden = true
+        topScoreButton.isHidden = true
     }
 
     @IBAction func showTopScores(_ sender: UIButton) {
-        let vc = TopScoresTableViewController()
-        self.present(vc, animated: true, completion: nil)
+        let vc = TopScoreViewController()
+        self.navigationController!.pushViewController(vc, animated: true)
     }
 
 
