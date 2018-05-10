@@ -81,6 +81,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spider.name = "spider"
         addChild(spider)
 
+        let web = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 1, height: self.frame.size.height))
+        spider.addChild(web)
+
         spiderTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
             let moveDownAction = SKAction.moveBy(x: 0, y: -300, duration: 1)
             let moveUpAction = SKAction.moveBy(x: 0, y: 300, duration: 1)
