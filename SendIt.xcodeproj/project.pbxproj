@@ -9,15 +9,17 @@
 /* Begin PBXBuildFile section */
 		39230DCC20A2C6AC005CDFC2 /* TopScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */; };
 		39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */; };
+		395B669E20A3EDAB00C8A8DF /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395B669D20A3EDAB00C8A8DF /* GameViewController.xib */; };
 		39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39971D912075CCE1001776D6 /* 8bitwonder.ttf */; };
+		39E2677620A3EC580040F6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2677520A3EC570040F6A9 /* MainViewController.swift */; };
+		39E2677820A3EC7B0040F6A9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2677720A3EC7B0040F6A9 /* GameViewController.swift */; };
 		39E2BA1120A252F600824F6B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1020A252F600824F6B /* NetworkManager.swift */; };
 		39E2BA1420A253C200824F6B /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1320A253C200824F6B /* ScoreData.swift */; };
 		39E2BA1F20A25B8D00824F6B /* TopScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */; };
 		39E2BA2020A25B8D00824F6B /* TopScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E2BA1E20A25B8D00824F6B /* TopScoreTableViewCell.xib */; };
 		39EA091620578F1A00444B4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA091520578F1A00444B4F /* AppDelegate.swift */; };
 		39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39EA091C20578F1B00444B4F /* Assets.xcassets */; };
-		39EA092920578F3900444B4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA092720578F3900444B4F /* GameViewController.swift */; };
-		39EA092A20578F3900444B4F /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EA092820578F3900444B4F /* GameViewController.xib */; };
+		39EA092A20578F3900444B4F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EA092820578F3900444B4F /* MainViewController.xib */; };
 		39EA092C2057907F00444B4F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA092B2057907F00444B4F /* GameScene.swift */; };
 		EE6F778384B18EEE97E98041 /* Pods_SendIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D181C242B6DCBE53B034018B /* Pods_SendIt.framework */; };
 /* End PBXBuildFile section */
@@ -26,7 +28,10 @@
 		28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.release.xcconfig"; sourceTree = "<group>"; };
 		39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoreViewController.swift; sourceTree = "<group>"; };
 		39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopScoreViewController.xib; sourceTree = "<group>"; };
+		395B669D20A3EDAB00C8A8DF /* GameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
 		39971D912075CCE1001776D6 /* 8bitwonder.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitwonder.ttf; sourceTree = "<group>"; };
+		39E2677520A3EC570040F6A9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		39E2677720A3EC7B0040F6A9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		39E2BA1020A252F600824F6B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		39E2BA1320A253C200824F6B /* ScoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreData.swift; sourceTree = "<group>"; };
 		39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -35,8 +40,7 @@
 		39EA091520578F1A00444B4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39EA091C20578F1B00444B4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39EA092120578F1B00444B4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39EA092720578F3900444B4F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		39EA092820578F3900444B4F /* GameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
+		39EA092820578F3900444B4F /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		39EA092B2057907F00444B4F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		7B4629A5721D1BBC1243DD0F /* Pods-SendIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.debug.xcconfig"; sourceTree = "<group>"; };
 		D181C242B6DCBE53B034018B /* Pods_SendIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,13 +78,15 @@
 		39A2D68D205A08610001C4BD /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				39EA092720578F3900444B4F /* GameViewController.swift */,
-				39EA092820578F3900444B4F /* GameViewController.xib */,
+				39E2677520A3EC570040F6A9 /* MainViewController.swift */,
+				39EA092820578F3900444B4F /* MainViewController.xib */,
 				39EA092B2057907F00444B4F /* GameScene.swift */,
 				39E2BA1D20A25B8D00824F6B /* TopScoreTableViewCell.swift */,
 				39E2BA1E20A25B8D00824F6B /* TopScoreTableViewCell.xib */,
 				39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */,
 				39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */,
+				39E2677720A3EC7B0040F6A9 /* GameViewController.swift */,
+				395B669D20A3EDAB00C8A8DF /* GameViewController.xib */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -194,7 +200,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				39971D922075CCE2001776D6 /* 8bitwonder.ttf in Resources */,
-				39EA092A20578F3900444B4F /* GameViewController.xib in Resources */,
+				39EA092A20578F3900444B4F /* MainViewController.xib in Resources */,
+				395B669E20A3EDAB00C8A8DF /* GameViewController.xib in Resources */,
 				39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */,
 				39E2BA2020A25B8D00824F6B /* TopScoreTableViewCell.xib in Resources */,
 				39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */,
@@ -250,7 +257,8 @@
 				39E2BA1120A252F600824F6B /* NetworkManager.swift in Sources */,
 				39EA092C2057907F00444B4F /* GameScene.swift in Sources */,
 				39E2BA1420A253C200824F6B /* ScoreData.swift in Sources */,
-				39EA092920578F3900444B4F /* GameViewController.swift in Sources */,
+				39E2677620A3EC580040F6A9 /* MainViewController.swift in Sources */,
+				39E2677820A3EC7B0040F6A9 /* GameViewController.swift in Sources */,
 				39230DCC20A2C6AC005CDFC2 /* TopScoreViewController.swift in Sources */,
 				39E2BA1F20A25B8D00824F6B /* TopScoreTableViewCell.swift in Sources */,
 				39EA091620578F1A00444B4F /* AppDelegate.swift in Sources */,

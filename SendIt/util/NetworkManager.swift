@@ -44,6 +44,15 @@ class NetworkManager {
         }
     }
 
+    static func sendScore(completion: @escaping (_ success: Bool) -> Void) {
+        runRequest(urlFrag: "addscore/", params: [:]) {
+            (response, error) -> Void in
+            if error != nil {
+                completion(false)
+            }
+        }
+    }
+
     private static func runRequest(urlFrag: String, params: [String: String], completion:@escaping (String?, Error?) -> ()) {
         var postString = "?"
         for (key, value) in params {

@@ -10,6 +10,7 @@ import UIKit
 
 class TopScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topScoreLabel: UILabel!
 
@@ -20,7 +21,10 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
 
         self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "background")!)
 
-        self.topScoreLabel.font = UIFont(name: "8BITWONDERNominal", size: 20)
+        self.topScoreLabel.font = UIFont(name: "8BITWONDERNominal", size: 32)
+
+        self.backButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 16)
+        self.backButton.setTitleColor(.white, for: .normal)
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -40,9 +44,9 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func back(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+//        self.present(MainViewController(), animated: true)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,6 +76,10 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
         cell.contentView.backgroundColor = UIColor.clear
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 }

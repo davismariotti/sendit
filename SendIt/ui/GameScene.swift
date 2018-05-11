@@ -223,6 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver = true
             climber.physicsBody?.affectedByGravity = true
             climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
+            doGameOver()
         }
     }
 
@@ -237,6 +238,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if background2.frame.maxY <= 0 {
             background2.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
+    }
+
+    func doGameOver() {
+        
     }
 
     func rand(withMultiplier multiplier: Double) -> Double {
