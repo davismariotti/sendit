@@ -10,7 +10,8 @@ import UIKit
 import SpriteKit
 import PureLayout
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, GameSceneDelegate {
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var topScoreButton: UIButton!
@@ -20,10 +21,8 @@ class MainViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "background")!)
 
-        
         self.titleLabel.font = UIFont(name: "8BITWONDERNominal", size: 56)
         self.titleLabel.textColor = .white
-
 
         self.startButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 20)
         self.startButton.setTitleColor(.white, for: .normal)
@@ -35,13 +34,13 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func startGame(_ sender: UIButton) {
-        self.navigationController?.pushViewController(GameViewController(), animated: true)
-//        self.present(GameViewController(), animated: true)
+        let vc = GameViewController()
+        vc.gameDelegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func showTopScores(_ sender: UIButton) {
         let vc = TopScoreViewController()
-//        self.present(vc, animated: false)
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -50,5 +49,8 @@ class MainViewController: UIViewController {
         return .lightContent
     }
 
+    func returnToMainMenu() {
+        self.navigationController?.popViewController(animated: true)
+    }
 
 }

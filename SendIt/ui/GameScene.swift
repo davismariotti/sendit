@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score: Int = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
     let endGameLabel: SKLabelNode = SKLabelNode(text: "Game Over")
+    let menuButtonLabel = SKLabelNode(text: "Main Menu")
     let resetButtonLabel = SKLabelNode(text: "Reset")
     var gameOver = false
     var pointNodes: [SKShapeNode] = []
@@ -31,6 +32,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let spiderCategory: UInt32 = 0x1 << 2
 
     let backgroundSpeed: CGFloat = 4.0
+
+    var gameDelegate: GameSceneDelegate?
 
 
     enum Direction {
@@ -48,7 +51,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
-//        SKPhysicsBody(polygonFrom: CGPath()
         climber.physicsBody?.usesPreciseCollisionDetection = true
         climber.physicsBody?.categoryBitMask = self.climberCategory
         climber.physicsBody?.contactTestBitMask = self.pointCategory
@@ -68,12 +70,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endGameLabel.fontName = "8BITWONDERNominal"
         endGameLabel.horizontalAlignmentMode = .center
 
+        menuButtonLabel.fontColor = SKColor.white
+        menuButtonLabel.fontName = "8BITWONDERNominal"
+        menuButtonLabel.fontSize = 14
+        menuButtonLabel.position = CGPoint(x: 10, y: 20)
+        menuButtonLabel.horizontalAlignmentMode = .left
+        addChild(menuButtonLabel)
 
         resetButtonLabel.fontColor = SKColor.white
         resetButtonLabel.fontName = "8BITWONDERNominal"
         resetButtonLabel.fontSize = 15
-        resetButtonLabel.position = endGameLabel.position.applying(CGAffineTransform(translationX: 0, y: -50))
+        resetButtonLabel.position = endGameLabel.position.applying(CGAffineTransform(translationX: 0, y: -100))
         resetButtonLabel.horizontalAlignmentMode = .center
+
 
         for _ in 0...5 {
             createPointNode()
@@ -156,6 +165,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchedNodes = self.nodes(at: touchLocation)
             if touchedNodes.contains(resetButtonLabel) {
                 resetGame()
+                return
+            } else if touchedNodes.contains(menuButtonLabel) {
+                goToMenu()
                 return
             }
             location = touch.location(in: view)
@@ -271,6 +283,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOver = false
         endGameLabel.removeFromParent()
         resetButtonLabel.removeFromParent()
+    }
+
+    func goToMenu() {
+        self.gameDelegate?.returnToMainMenu()
     }
 
     func rand(withMultiplier multiplier: Double) -> Double {

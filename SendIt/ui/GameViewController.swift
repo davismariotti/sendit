@@ -11,13 +11,15 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    var gameDelegate: GameSceneDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = GameScene (size: view.bounds.size)
+        let scene = GameScene(size: view.bounds.size)
+        scene.gameDelegate = gameDelegate
         let skView = view as! SKView
         skView.presentScene(scene)
-
     }
 
 }
