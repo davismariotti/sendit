@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var background2: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var climber: SKSpriteNode = SKSpriteNode(imageNamed: "climbergirl1")
+    var climberCharacter: String = "girl"
     var climberState = true
     var score: Double = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
@@ -48,6 +49,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background2.position = CGPoint(x: self.frame.size.width * 1.5, y: self.frame.size.height * 1.5)
         addChild(background2)
 
+
+        let choosenAvatar = UserDefaults.standard.string(forKey: "character")
+        if choosenAvatar == nil || choosenAvatar == "girl" {
+            self.climberCharacter = "girl"
+             self.climber.texture = SKTexture(imageNamed: "climbergirl1")
+        } else {
+            self.climberCharacter = "boy"
+            self.climber.texture = SKTexture(imageNamed: "climberboy1")
+        }
 
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
@@ -115,10 +125,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
             if self.touched {
                 if self.climberState {
-                    self.climber.texture = SKTexture(imageNamed: "climbergirl1")
+                    if self.climberCharacter == "girl" {
+                        self.climber.texture = SKTexture(imageNamed: "climbergirl1")
+                    } else {
+                        self.climber.texture = SKTexture(imageNamed: "climberboy1")
+                    }
                     self.climberState = false
                 } else {
-                    self.climber.texture = SKTexture(imageNamed: "climbergirl2")
+                    if self.climberCharacter == "girl" {
+                        self.climber.texture = SKTexture(imageNamed: "climbergirl2")
+                    } else {
+                        self.climber.texture = SKTexture(imageNamed: "climberboy2")
+                    }
                     self.climberState = true
                 }
             }

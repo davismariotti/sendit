@@ -81,7 +81,8 @@ class MainViewController: UIViewController, GameSceneDelegate {
     }
 
     @IBAction func showOptions(_ sender: UIButton) {
-        
+        let vc = OptionViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

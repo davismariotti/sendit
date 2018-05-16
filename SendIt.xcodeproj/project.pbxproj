@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39170EEF20AC15B900058324 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39170EED20AC15B900058324 /* OptionViewController.swift */; };
+		39170EF020AC15B900058324 /* OptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39170EEE20AC15B900058324 /* OptionViewController.xib */; };
 		39230DCC20A2C6AC005CDFC2 /* TopScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */; };
 		39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */; };
 		3959D5D020ABB46800502FAF /* GameSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3959D5CF20ABB46800502FAF /* GameSceneDelegate.swift */; };
@@ -27,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		28C688BCBF16F3450A6EEB4F /* Pods-SendIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-SendIt/Pods-SendIt.release.xcconfig"; sourceTree = "<group>"; };
+		39170EED20AC15B900058324 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		39170EEE20AC15B900058324 /* OptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionViewController.xib; sourceTree = "<group>"; };
 		39230DCA20A2C6AC005CDFC2 /* TopScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScoreViewController.swift; sourceTree = "<group>"; };
 		39230DCB20A2C6AC005CDFC2 /* TopScoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopScoreViewController.xib; sourceTree = "<group>"; };
 		3959D5CF20ABB46800502FAF /* GameSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				39E2677720A3EC7B0040F6A9 /* GameViewController.swift */,
 				395B669D20A3EDAB00C8A8DF /* GameViewController.xib */,
 				3959D5CF20ABB46800502FAF /* GameSceneDelegate.swift */,
+				39170EED20AC15B900058324 /* OptionViewController.swift */,
+				39170EEE20AC15B900058324 /* OptionViewController.xib */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 				39EA091D20578F1B00444B4F /* Assets.xcassets in Resources */,
 				39E2BA2020A25B8D00824F6B /* TopScoreTableViewCell.xib in Resources */,
 				39230DCD20A2C6AC005CDFC2 /* TopScoreViewController.xib in Resources */,
+				39170EF020AC15B900058324 /* OptionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39E2BA1120A252F600824F6B /* NetworkManager.swift in Sources */,
+				39170EEF20AC15B900058324 /* OptionViewController.swift in Sources */,
 				3959D5D020ABB46800502FAF /* GameSceneDelegate.swift in Sources */,
 				39EA092C2057907F00444B4F /* GameScene.swift in Sources */,
 				39E2BA1420A253C200824F6B /* ScoreData.swift in Sources */,
