@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var background2: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var climber: SKSpriteNode = SKSpriteNode(imageNamed: "climbergirl1")
     var climberState = true
-    var score: Int = 0
+    var score: Double = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
     let endGameLabel: SKLabelNode = SKLabelNode(text: "Game Over")
     let menuButtonLabel = SKLabelNode(text: "Main Menu")
@@ -145,7 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if contact.bodyB.node?.name == "climber" && contact.bodyA.node?.name == "spider" {
             spiderHit(climber: nodeB as! SKSpriteNode, spider: nodeA as! SKSpriteNode)
         }
-
     }
 
     func moveSpider (){
@@ -155,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         moveClimber()
-        scoreLabel.text = String(score / 25)
+        scoreLabel.text = String(Int(score))
 
     }
 
@@ -236,7 +235,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func pointHit(climber: SKSpriteNode, object: SKNode) {
         if object is SKShapeNode {
-            score += 500
+            score += 10
             object.removeFromParent()
             pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
             createPointNode()
@@ -249,7 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func moveBackground(direction: Direction, speed: CGFloat) {
         movePointNodes()
-        score += 1
+        score += 0.04
         background.position = CGPoint(x: self.frame.size.width / 2, y: background.position.y - speed)
         if background.frame.maxY <= 0 {
             background.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
@@ -269,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
         }
 
-        NetworkManager.sendScore(username: "test user", score: score) {
+        NetworkManager.sendScore(username: "test user", score: Int(score)) {
         (success) -> Void in
             print("game over send score ", success)
         }
