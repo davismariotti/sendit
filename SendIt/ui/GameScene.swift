@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score: Int = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
     let endGameLabel: SKLabelNode = SKLabelNode(text: "Game Over")
+    let resetButtonLabel = SKLabelNode(text: "Reset")
     var gameOver = false
     var pointNodes: [SKShapeNode] = []
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
@@ -66,6 +67,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endGameLabel.fontColor = SKColor.white
         endGameLabel.fontName = "8BITWONDERNominal"
         endGameLabel.horizontalAlignmentMode = .center
+
+
+        resetButtonLabel.fontColor = SKColor.white
+        resetButtonLabel.fontName = "8BITWONDERNominal"
+        resetButtonLabel.fontSize = 15
+        resetButtonLabel.position = endGameLabel.position.applying(CGAffineTransform(translationX: 0, y: -50))
+        resetButtonLabel.horizontalAlignmentMode = .center
 
         for _ in 0...5 {
             createPointNode()
@@ -143,9 +151,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touched = true
         for touch in touches {
-            location = touch.location(in: view)
+            let touchLocation = touch.location(in: view)
+            let touchedNodes = self.nodes(at: touchLocation)
+            if touchedNodes.contains(resetButtonLabel) {
+                resetGame()
+                return
+            }
+            location = touchLocation
+            touched = true
         }
     }
 
@@ -218,13 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func spiderHit(climber: SKSpriteNode, spider: SKSpriteNode) {
-        if !self.children.contains(endGameLabel) {
-            addChild(endGameLabel)
-            gameOver = true
-            climber.physicsBody?.affectedByGravity = true
-            climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
-            doGameOver()
-        }
+        doGameOver()
     }
 
     func moveBackground(direction: Direction, speed: CGFloat) {
@@ -241,7 +249,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func doGameOver() {
-        
+        if !self.children.contains(endGameLabel) {
+            addChild(endGameLabel)
+            addChild(resetButtonLabel)
+            gameOver = true
+            climber.physicsBody?.affectedByGravity = true
+            climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
+        }
+
+        NetworkManager.sendScore(username: "test user", score: score) {
+        (success) -> Void in
+            print("game over send score ", success)
+        }
+    }
+
+    func resetGame() {
+        climber.physicsBody?.affectedByGravity = false
+        climber.position = CGPoint(x: self.view!.frame.size.width / 2, y: self.view!.frame.size.height / 2)
+        climber.physicsBody?.velocity = CGVector.zero
+        score = 0
+        gameOver = false
+        endGameLabel.removeFromParent()
+        resetButtonLabel.removeFromParent()
     }
 
     func rand(withMultiplier multiplier: Double) -> Double {

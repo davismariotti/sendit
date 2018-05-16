@@ -44,12 +44,12 @@ class NetworkManager {
         }
     }
 
-    static func sendScore(completion: @escaping (_ success: Bool) -> Void) {
-        runRequest(urlFrag: "addscore/", params: [:]) {
+    static func sendScore(username: String, score: Int, completion: @escaping (_ success: Bool) -> Void) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        runRequest(urlFrag: "addscore/", params: ["username": username, "score": String(score), "date": dateFormatter.string(from: Date())]) {
             (response, error) -> Void in
-            if error != nil {
-                completion(false)
-            }
+            completion(error != nil)
         }
     }
 
