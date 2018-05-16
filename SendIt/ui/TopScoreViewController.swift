@@ -75,6 +75,10 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
         cell.contentView.backgroundColor = UIColor.clear
     }
 
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
