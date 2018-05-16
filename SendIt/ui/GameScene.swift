@@ -99,7 +99,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         spider.position = CGPoint(x: view.frame.size.width * 0.85, y: view.frame.size.height + 100)
-        print(spider.size)
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.usesPreciseCollisionDetection = true
         spider.physicsBody?.categoryBitMask = self.spiderCategory
@@ -112,12 +111,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let web = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 1, height: self.frame.size.height))
         spider.addChild(web)
 
-        spiderTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
-            let moveDownAction = SKAction.moveBy(x: 0, y: -300, duration: 1)
-            let moveUpAction = SKAction.moveBy(x: 0, y: 300, duration: 1)
-            let sequence1 = SKAction.group([moveDownAction, SKAction.wait(forDuration: 2)])
-            self.spider.run(sequence1) {
-                self.spider.run(moveUpAction)
+        spiderTimer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) {_ in
+            let downPoint = CGPoint(x: Double(self.spider.position.x), y: Double(self.frame.size.height / 3) + self.rand(withMultiplier: Double(self.frame.size.height / 2)))
+
+            let moveDownAction = SKAction.move(to: downPoint, duration: 1.5)
+            let waitAction = SKAction.wait(forDuration: 2)
+
+            let moveUpAction = SKAction.move(to: CGPoint(x: Double(self.spider.position.x), y: Double(self.frame.size.height) + 100), duration: 1.5)
+
+            let moveSequence = SKAction.group([moveDownAction, waitAction])
+
+            self.spider.run(moveSequence) {
+                self.spider.run(moveUpAction) {
+                    let moveSideAction = SKAction.move(to: CGPoint(x: 50 + self.rand(withMultiplier: Double(self.frame.size.width - 100)), y: Double(self.frame.size.height) + 100), duration: 0.1)
+                    self.spider.run(moveSideAction)
+                }
             }
         }
 
