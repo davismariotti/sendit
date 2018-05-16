@@ -21,25 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.isNavigationBarHidden = true
 
         window?.rootViewController = nav
-//        window?.rootViewController = MainViewController()
         window?.makeKeyAndVisible()
 
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
     }
 
 }
@@ -66,7 +50,6 @@ extension String {
             }
         }
         return nil
-
     }
 }
 

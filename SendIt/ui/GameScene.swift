@@ -15,19 +15,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var location = CGPoint.zero
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     var background2: SKSpriteNode = SKSpriteNode(imageNamed: "background")
+
     var climber: SKSpriteNode = SKSpriteNode(imageNamed: "climbergirl1")
     var climberCharacter: String = "girl"
     var climberState = true
+
+    var gameOver = false
     var score: Double = 0
     var scoreLabel: SKLabelNode = SKLabelNode(text: "0")
+
     let endGameLabel: SKLabelNode = SKLabelNode(text: "Game Over")
     let menuButtonLabel = SKLabelNode(text: "Main Menu")
     let resetButtonLabel = SKLabelNode(text: "Reset")
-    var gameOver = false
+
     var pointNodes: [SKShapeNode] = []
+
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
     var spiderTimer: Timer!
 
+    // Bit masks for collisions and contacts
     let pointCategory: UInt32 = 0x1 << 0
     let climberCategory: UInt32 = 0x1 << 1
     let spiderCategory: UInt32 = 0x1 << 2
@@ -42,6 +48,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didMove(to view: SKView) {
+
+        // Add backgrounds
         background.size = frame.size
         background.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
         addChild(background)
@@ -50,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(background2)
 
 
+        // Use choosen avatar
         let choosenAvatar = UserDefaults.standard.string(forKey: "character")
         if choosenAvatar == nil || choosenAvatar == "girl" {
             self.climberCharacter = "girl"
@@ -59,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.climber.texture = SKTexture(imageNamed: "climberboy1")
         }
 
+        // Add climber
         climber.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         climber.physicsBody = SKPhysicsBody(rectangleOf: climber.size)
         climber.physicsBody?.usesPreciseCollisionDetection = true
@@ -69,6 +79,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         climber.name = "climber"
         addChild(climber)
 
+
+        // Add labels
         scoreLabel.position = CGPoint(x: view.frame.size.width - 20, y: 20)
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontName = "8BITWONDERNominal"
@@ -98,6 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             createPointNode()
         }
 
+        // Add spider
         spider.position = CGPoint(x: view.frame.size.width * 0.85, y: view.frame.size.height + 100)
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.usesPreciseCollisionDetection = true
@@ -173,9 +186,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func moveSpider (){
-
+    func pointHit(climber: SKSpriteNode, object: SKNode) {
+        if object is SKShapeNode {
+            score += 10
+            object.removeFromParent()
+            pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
+            createPointNode()
+        }
     }
+
+    func spiderHit(climber: SKSpriteNode, spider: SKSpriteNode) {
+        doGameOver()
+    }
+
+    // MARK: - Frame update
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -183,6 +207,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.text = String(Int(score))
 
     }
+
+    // MARK: - Touches
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -211,6 +237,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         touched = false
     }
 
+    // MARK: - Point Nodes
+
     func createPointNode() {
         let pointNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
 
@@ -238,6 +266,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
+    // MARK: - Move climber
+
     func moveClimber() {
         if touched && !gameOver {
             // First move horizontally
@@ -259,18 +289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func pointHit(climber: SKSpriteNode, object: SKNode) {
-        if object is SKShapeNode {
-            score += 10
-            object.removeFromParent()
-            pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
-            createPointNode()
-        }
-    }
-
-    func spiderHit(climber: SKSpriteNode, spider: SKSpriteNode) {
-        doGameOver()
-    }
+    // MARK: - Move background
 
     func moveBackground(direction: Direction, speed: CGFloat) {
         movePointNodes()
@@ -284,6 +303,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             background2.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
         }
     }
+
+    // MARK: - Game over logic
 
     func doGameOver() {
         if !self.children.contains(endGameLabel) {
@@ -315,6 +336,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func goToMenu() {
         self.gameDelegate?.returnToMainMenu()
     }
+
+    // MARK: - Miscellaneous
 
     func rand(withMultiplier multiplier: Double) -> Double {
         return drand48() * multiplier
