@@ -43,9 +43,10 @@ class MainViewController: UIViewController, GameSceneDelegate {
             let alert = UIAlertController(title: "Enter username", message: "", preferredStyle: .alert)
             alert.addTextField() { (textField) in
                 textField.placeholder = "Username"
+                textField.returnKeyType = .done
             }
 
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "Done", style: .default, handler: {[weak alert] (_) in
                 let textField = alert!.textFields![0]
                 if let text = textField.text {
                     if text != "" {
