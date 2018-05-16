@@ -188,7 +188,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func pointHit(climber: SKSpriteNode, object: SKNode) {
         if object is SKShapeNode {
-            score += 10
+            if !gameOver {
+                score += 10
+            }
             object.removeFromParent()
             pointNodes.remove(at: pointNodes.index(of: object as! SKShapeNode)!)
             createPointNode()
@@ -293,7 +295,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func moveBackground(direction: Direction, speed: CGFloat) {
         movePointNodes()
-        score += 0.04
+        moveCave()
+        if !gameOver {
+            score += 0.04
+        }
         background.position = CGPoint(x: self.frame.size.width / 2, y: background.position.y - speed)
         if background.frame.maxY <= 0 {
             background.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
