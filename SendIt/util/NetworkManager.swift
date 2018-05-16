@@ -50,7 +50,7 @@ class NetworkManager {
         if let username = UserDefaults.standard.string(forKey: "username") {
             runRequest(urlFrag: "addscore/", params: ["username": username, "score": String(score), "date": dateFormatter.string(from: Date())]) {
                 (response, error) -> Void in
-                completion(error != nil)
+                completion(error == nil)
             }
         }
     }

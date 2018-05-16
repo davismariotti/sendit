@@ -288,7 +288,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         NetworkManager.sendScore(score: Int(score)) {
         (success) -> Void in
-            print("game over send score ", success)
+            if !success {
+                print("Send score error!")
+            }
         }
     }
 
