@@ -15,6 +15,7 @@ class MainViewController: UIViewController, GameSceneDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var topScoreButton: UIButton!
+    @IBOutlet weak var optionsButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,9 @@ class MainViewController: UIViewController, GameSceneDelegate {
 
         self.topScoreButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 15)
         self.topScoreButton.setTitleColor(.white, for: .normal)
+
+        self.optionsButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 15)
+        self.optionsButton.setTitleColor(.white, for: .normal)
 
 
         // Check if the user has a username
@@ -74,6 +78,10 @@ class MainViewController: UIViewController, GameSceneDelegate {
         let vc = TopScoreViewController()
         self.navigationController?.pushViewController(vc, animated: true)
 
+    }
+
+    @IBAction func showOptions(_ sender: UIButton) {
+        
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

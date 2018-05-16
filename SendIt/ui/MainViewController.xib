@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="SendIt" customModuleProvider="target">
             <connections>
+                <outlet property="optionsButton" destination="pOb-m3-Tw2" id="zQX-ap-ptB"/>
                 <outlet property="startButton" destination="Kpp-ZD-SpD" id="XAI-zV-cMm"/>
                 <outlet property="titleLabel" destination="w5s-dT-xbY" id="iCm-ki-os9"/>
                 <outlet property="topScoreButton" destination="Unk-xB-oxT" id="78T-CE-JOT"/>
@@ -42,11 +43,20 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOb-m3-Tw2">
+                    <rect key="frame" x="301" y="617" width="54" height="30"/>
+                    <state key="normal" title="Options"/>
+                    <connections>
+                        <action selector="showOptions:" destination="-1" eventType="touchUpInside" id="IT4-28-daL"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pOb-m3-Tw2" secondAttribute="trailing" constant="20" id="36W-i1-0YI"/>
                 <constraint firstItem="Kpp-ZD-SpD" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Eoo-iu-WNK"/>
                 <constraint firstItem="Unk-xB-oxT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="N0h-6F-sf1"/>
                 <constraint firstItem="Unk-xB-oxT" firstAttribute="top" secondItem="Kpp-ZD-SpD" secondAttribute="bottom" constant="80" id="O3v-zQ-xmG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pOb-m3-Tw2" secondAttribute="bottom" constant="20" id="SYd-DL-UNF"/>
                 <constraint firstItem="w5s-dT-xbY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WQK-CP-T44"/>
                 <constraint firstItem="w5s-dT-xbY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="aKB-Lh-RSQ"/>
                 <constraint firstItem="Kpp-ZD-SpD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mpQ-bv-Ppu"/>
