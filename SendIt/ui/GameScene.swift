@@ -33,10 +33,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
     var spiderTimer: Timer!
 
+    var cave: SKShapeNode = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
+
     // Bit masks for collisions and contacts
     let pointCategory: UInt32 = 0x1 << 0
     let climberCategory: UInt32 = 0x1 << 1
     let spiderCategory: UInt32 = 0x1 << 2
+    let caveCategory: UInt32 = 0x1 << 3
 
     let backgroundSpeed: CGFloat = 4.0
 
@@ -77,6 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         climber.physicsBody?.collisionBitMask = 0
         climber.physicsBody?.affectedByGravity = false
         climber.name = "climber"
+        climber.zPosition = 8
         addChild(climber)
 
 
@@ -85,18 +89,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontName = "8BITWONDERNominal"
         scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.zPosition = 6
         addChild(scoreLabel)
 
         endGameLabel.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
         endGameLabel.fontColor = SKColor.white
         endGameLabel.fontName = "8BITWONDERNominal"
         endGameLabel.horizontalAlignmentMode = .center
+        endGameLabel.zPosition = 6
 
         menuButtonLabel.fontColor = SKColor.white
         menuButtonLabel.fontName = "8BITWONDERNominal"
         menuButtonLabel.fontSize = 14
         menuButtonLabel.position = CGPoint(x: 10, y: 20)
         menuButtonLabel.horizontalAlignmentMode = .left
+        menuButtonLabel.zPosition = 6
         addChild(menuButtonLabel)
 
         resetButtonLabel.fontColor = SKColor.white
@@ -104,6 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resetButtonLabel.fontSize = 15
         resetButtonLabel.position = endGameLabel.position.applying(CGAffineTransform(translationX: 0, y: -100))
         resetButtonLabel.horizontalAlignmentMode = .center
+        resetButtonLabel.zPosition = 6
 
 
         for _ in 0...5 {
@@ -119,6 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spider.physicsBody?.contactTestBitMask = self.climberCategory
         spider.physicsBody?.affectedByGravity = false
         spider.name = "spider"
+        spider.zPosition = 5
         addChild(spider)
 
         let web = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 1, height: self.frame.size.height))
@@ -141,6 +150,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+
+        // Add cave
+        cave.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height + 300)
+        cave.fillColor = .black
+        cave.lineWidth = 0
+        cave.zPosition = 4
+        cave.physicsBody = SKPhysicsBody(rectangleOf: cave.frame.size)
+        cave.physicsBody?.usesPreciseCollisionDetection = true
+        cave.physicsBody?.categoryBitMask = self.caveCategory
+        cave.physicsBody?.contactTestBitMask = self.climberCategory
+        cave.physicsBody?.collisionBitMask = 0
+        cave.physicsBody?.affectedByGravity = false
+        cave.name = "cave"
+        addChild(cave)
 
 
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) {_ in
@@ -183,6 +206,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             spiderHit(climber: nodeA as! SKSpriteNode, spider: nodeB as! SKSpriteNode)
         } else if contact.bodyB.node?.name == "climber" && contact.bodyA.node?.name == "spider" {
             spiderHit(climber: nodeB as! SKSpriteNode, spider: nodeA as! SKSpriteNode)
+        } else if contact.bodyA.node?.name == "climber" && contact.bodyB.node?.name == "cave" {
+            caveHit(climber: nodeA as! SKSpriteNode, cave: nodeB)
+        } else if contact.bodyB.node?.name == "climber" && contact.bodyA.node?.name == "cave" {
+            caveHit(climber: nodeB as! SKSpriteNode, cave: nodeA)
         }
     }
 
@@ -198,6 +225,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func spiderHit(climber: SKSpriteNode, spider: SKSpriteNode) {
+        doGameOver()
+    }
+
+    func caveHit(climber: SKSpriteNode, cave: SKNode) { // TODO
         doGameOver()
     }
 
@@ -249,6 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pointNode.physicsBody?.usesPreciseCollisionDetection = true
         pointNode.physicsBody?.isDynamic = false
         pointNode.physicsBody?.affectedByGravity = false
+        pointNode.zPosition = 3
         pointNode.name = "point"
 
         pointNode.position = CGPoint(x: rand(withMultiplier: Double(self.frame.width)), y: Double(self.frame.height) + rand(withMultiplier: 200))
@@ -306,6 +338,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background2.position = CGPoint(x: self.frame.size.width / 2, y: background2.position.y - speed)
         if background2.frame.maxY <= 0 {
             background2.position = CGPoint(x: self.frame.size.width / 2, y: view!.frame.size.height * 1.5)
+        }
+    }
+
+    // MARK: - Move Cave
+
+    func moveCave() {
+        if cave.position.y > -200 {
+            cave.position = CGPoint(x: cave.position.x, y: cave.position.y - self.backgroundSpeed)
+        } else {
+            cave.position = CGPoint(x: rand(withMultiplier: Double(self.frame.size.width)), y: Double(self.frame.size.height) + 200 + rand(withMultiplier: 300))
         }
     }
 
