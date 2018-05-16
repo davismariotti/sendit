@@ -268,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
         }
 
-        NetworkManager.sendScore(username: "test user", score: Int(score)) {
+        NetworkManager.sendScore(score: Int(score)) {
         (success) -> Void in
             print("game over send score ", success)
         }

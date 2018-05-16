@@ -41,12 +41,10 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
-
     }
 
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
-//        self.present(MainViewController(), animated: true)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,7 +58,6 @@ class TopScoreViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "kTopScoreTableViewCellIdentifier", for: indexPath) as! TopScoreTableViewCell
         let scoreData = scoreDatas[indexPath.row]
-        print(scoreData.username)
         cell.username.text = scoreData.username
         cell.score.text = String(scoreData.score)
         let dateFormatter = DateFormatter()

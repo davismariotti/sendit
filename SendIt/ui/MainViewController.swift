@@ -31,6 +31,37 @@ class MainViewController: UIViewController, GameSceneDelegate {
         self.topScoreButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 15)
         self.topScoreButton.setTitleColor(.white, for: .normal)
 
+
+        // Check if the user has a username
+        let defaults = UserDefaults.standard
+        let username = defaults.string(forKey: "username")
+        if username == nil {
+            let alert = UIAlertController(title: "Enter username", message: "", preferredStyle: .alert)
+            alert.addTextField() { (textField) in
+                textField.placeholder = "Username"
+            }
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak alert] (_) in
+                let textField = alert!.textFields![0]
+                if let text = textField.text {
+                    if text != "" {
+                        if text.count < 9 {
+                            defaults.set(text, forKey: "username")
+                            return
+                        } else {
+                            alert!.message = "Username must be no longer than 9 characters."
+                            self.present(alert!, animated: true, completion: nil)
+                            return
+                        }
+                    }
+                    alert!.message = "You must enter a username"
+                    self.present(alert!, animated: true, completion: nil)
+                }
+            }))
+
+            self.present(alert, animated: true, completion: nil)
+        }
+
     }
 
     @IBAction func startGame(_ sender: UIButton) {
