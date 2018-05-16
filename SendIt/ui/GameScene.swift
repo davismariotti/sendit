@@ -152,13 +152,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let touchLocation = touch.location(in: view)
+            let touchLocation = touch.location(in: self)
             let touchedNodes = self.nodes(at: touchLocation)
             if touchedNodes.contains(resetButtonLabel) {
                 resetGame()
                 return
             }
-            location = touchLocation
+            location = touch.location(in: view)
             touched = true
         }
     }
