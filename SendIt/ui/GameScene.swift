@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spider: SKSpriteNode = SKSpriteNode(imageNamed: "spider")
     var spiderTimer: Timer!
 
-    var cave: SKShapeNode = SKShapeNode(rectOf: CGSize(width: 100, height: 200))
+    var cave: SKSpriteNode = SKSpriteNode(imageNamed: "cave")
 
     // Bit masks for collisions and contacts
     let pointCategory: UInt32 = 0x1 << 0
@@ -51,7 +51,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didMove(to view: SKView) {
-
         // Add backgrounds
         background.size = frame.size
         background.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
@@ -151,12 +150,71 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
+        let offsetX = cave.size.width * cave.anchorPoint.x
+        let offsetY = cave.size.height * cave.anchorPoint.y
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x:  53 - offsetX, y: 111 - offsetY))
+        path.addLine(to: CGPoint(x: 71 - offsetX, y: 110 - offsetY))
+        path.addLine(to: CGPoint(x: 72 - offsetX, y: 115 - offsetY))
+        path.addLine(to: CGPoint(x: 96 - offsetX, y: 114 - offsetY))
+        path.addLine(to: CGPoint(x: 96 - offsetX, y: 110 - offsetY))
+        path.addLine(to: CGPoint(x: 101 - offsetX, y: 110 - offsetY))
+        path.addLine(to: CGPoint(x: 101 - offsetX, y: 106 - offsetY))
+        path.addLine(to: CGPoint(x: 109 - offsetX, y: 104 - offsetY))
+        path.addLine(to: CGPoint(x: 111 - offsetX, y: 91 - offsetY))
+        path.addLine(to: CGPoint(x: 114 - offsetX, y: 91 - offsetY))
+        path.addLine(to: CGPoint(x: 115 - offsetX, y: 82 - offsetY))
+        path.addLine(to: CGPoint(x: 119 - offsetX, y: 81 - offsetY))
+        path.addLine(to: CGPoint(x: 119 - offsetX, y: 73 - offsetY))
+        path.addLine(to: CGPoint(x: 123 - offsetX, y: 72 - offsetY))
+        path.addLine(to: CGPoint(x: 125 - offsetX, y: 67 - offsetY))
+        path.addLine(to: CGPoint(x: 129 - offsetX, y: 67 - offsetY))
+        path.addLine(to: CGPoint(x: 129 - offsetX, y: 48 - offsetY))
+        path.addLine(to: CGPoint(x: 126 - offsetX, y: 47 - offsetY))
+        path.addLine(to: CGPoint(x: 125 - offsetX, y: 39 - offsetY))
+        path.addLine(to: CGPoint(x: 116 - offsetX, y: 38 - offsetY))
+        path.addLine(to: CGPoint(x: 116 - offsetX, y: 34 - offsetY))
+        path.addLine(to: CGPoint(x: 111 - offsetX, y: 33 - offsetY))
+        path.addLine(to: CGPoint(x: 111 - offsetX, y: 29 - offsetY))
+        path.addLine(to: CGPoint(x: 101 - offsetX, y: 29 - offsetY))
+        path.addLine(to: CGPoint(x: 101 - offsetX, y: 25 - offsetY))
+        path.addLine(to: CGPoint(x: 96 - offsetX, y: 24 - offsetY))
+        path.addLine(to: CGPoint(x: 96 - offsetX, y: 20 - offsetY))
+        path.addLine(to: CGPoint(x: 78 - offsetX, y: 19 - offsetY))
+        path.addLine(to: CGPoint(x: 77 - offsetX, y: 14 - offsetY))
+        path.addLine(to: CGPoint(x: 58 - offsetX, y: 14 - offsetY))
+        path.addLine(to: CGPoint(x: 58 - offsetX, y: 9 - offsetY))
+        path.addLine(to: CGPoint(x: 48 - offsetX, y: 10 - offsetY))
+        path.addLine(to: CGPoint(x: 48 - offsetX, y: 4 - offsetY))
+        path.addLine(to: CGPoint(x: 44 - offsetX, y: 4 - offsetY))
+        path.addLine(to: CGPoint(x: 43 - offsetX, y: 1 - offsetY))
+        path.addLine(to: CGPoint(x: 19 - offsetX, y: 0 - offsetY))
+        path.addLine(to: CGPoint(x: 19 - offsetX, y: 5 - offsetY))
+        path.addLine(to: CGPoint(x: 15 - offsetX, y: 5 - offsetY))
+        path.addLine(to: CGPoint(x: 14 - offsetX, y: 14 - offsetY))
+        path.addLine(to: CGPoint(x: 5 - offsetX, y: 14 - offsetY))
+        path.addLine(to: CGPoint(x: 4 - offsetX, y: 33 - offsetY))
+        path.addLine(to: CGPoint(x: 0 - offsetX, y: 34 - offsetY))
+        path.addLine(to: CGPoint(x: 0 - offsetX, y: 67 - offsetY))
+        path.addLine(to: CGPoint(x: 4 - offsetX, y: 66 - offsetY))
+        path.addLine(to: CGPoint(x: 4 - offsetX, y: 81 - offsetY))
+        path.addLine(to: CGPoint(x: 9 - offsetX, y: 80 - offsetY))
+        path.addLine(to: CGPoint(x: 11 - offsetX, y: 90 - offsetY))
+        path.addLine(to: CGPoint(x: 19 - offsetX, y: 90 - offsetY))
+        path.addLine(to: CGPoint(x: 19 - offsetX, y: 95 - offsetY))
+        path.addLine(to: CGPoint(x: 25 - offsetX, y: 95 - offsetY))
+        path.addLine(to: CGPoint(x: 25 - offsetX, y: 101 - offsetY))
+        path.addLine(to: CGPoint(x: 29 - offsetX, y: 100 - offsetY))
+        path.addLine(to: CGPoint(x: 29 - offsetX, y: 105 - offsetY))
+        path.addLine(to: CGPoint(x: 53 - offsetX, y: 105 - offsetY))
+
+        path.closeSubpath()
+
+        cave.physicsBody = SKPhysicsBody(polygonFrom: path)
+
         // Add cave
         cave.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height + 300)
-        cave.fillColor = .black
-        cave.lineWidth = 0
         cave.zPosition = 4
-        cave.physicsBody = SKPhysicsBody(rectangleOf: cave.frame.size)
         cave.physicsBody?.usesPreciseCollisionDetection = true
         cave.physicsBody?.categoryBitMask = self.caveCategory
         cave.physicsBody?.contactTestBitMask = self.climberCategory
@@ -273,7 +331,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Point Nodes
 
     func createPointNode() {
-        let pointNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let pointNode = SKShapeNode(rectOf: CGSize(width: 10, height: 10))
+//        let pointNode = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 10, height: 10))
 
         // Physics
         pointNode.physicsBody = SKPhysicsBody(rectangleOf: pointNode.frame.size)
@@ -354,18 +413,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Game over logic
 
     func doGameOver() {
-        if !self.children.contains(endGameLabel) {
-            addChild(endGameLabel)
-            addChild(resetButtonLabel)
-            gameOver = true
-            climber.physicsBody?.affectedByGravity = true
-            climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
-        }
+        if !gameOver {
+            if !self.children.contains(endGameLabel) {
+                addChild(endGameLabel)
+                addChild(resetButtonLabel)
+                gameOver = true
+                climber.physicsBody?.affectedByGravity = true
+                climber.physicsBody?.applyImpulse(CGVector(dx: 35, dy: 250))
+            }
 
-        NetworkManager.sendScore(score: Int(score)) {
-        (success) -> Void in
-            if !success {
-                print("Send score error!")
+            NetworkManager.sendScore(score: Int(score)) {
+            (success) -> Void in
+                if !success {
+                    print("Send score error!")
+                }
             }
         }
     }
