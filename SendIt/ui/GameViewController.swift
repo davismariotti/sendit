@@ -22,4 +22,8 @@ class GameViewController: UIViewController {
         skView.presentScene(scene)
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
 }
