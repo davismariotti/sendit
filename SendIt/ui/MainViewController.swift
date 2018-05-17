@@ -12,7 +12,6 @@ import PureLayout
 
 class MainViewController: UIViewController, GameSceneDelegate {
 
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var topScoreButton: UIButton!
     @IBOutlet weak var optionsButton: UIButton!
@@ -21,9 +20,6 @@ class MainViewController: UIViewController, GameSceneDelegate {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "background")!)
-
-        self.titleLabel.font = UIFont(name: "8BITWONDERNominal", size: 56)
-        self.titleLabel.textColor = .white
 
         self.startButton.titleLabel?.font = UIFont(name: "8BITWONDERNominal", size: 20)
         self.startButton.setTitleColor(.white, for: .normal)
