@@ -213,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cave.physicsBody = SKPhysicsBody(polygonFrom: path)
 
         // Add cave
-        cave.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height + 300)
+        cave.position = CGPoint(x: rand(withMultiplier: Double(self.frame.size.width)), y: Double(self.frame.size.height) + 200 + rand(withMultiplier: 300))
         cave.zPosition = 4
         cave.physicsBody?.usesPreciseCollisionDetection = true
         cave.physicsBody?.categoryBitMask = self.caveCategory
@@ -439,6 +439,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOver = false
         endGameLabel.removeFromParent()
         resetButtonLabel.removeFromParent()
+        cave.position = CGPoint(x: rand(withMultiplier: Double(self.frame.size.width)), y: Double(self.frame.size.height) + 200 + rand(withMultiplier: 300))
     }
 
     func goToMenu() {
